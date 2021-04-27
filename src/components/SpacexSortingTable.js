@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import {useTable, useGlobalFilter, useSortBy} from 'react-table'
+import {useTable, useGlobalFilter, useFilters, useSortBy} from 'react-table'
 import {COLUMNS} from './columns'
 import {GlobalFilter} from './GlobalFilter'
 import './table.css'
@@ -18,6 +18,7 @@ export const SpacexSortingTable = () => {
         columns: columns,
         data: launchData,
     },
+    useFilters,
     useGlobalFilter,
     useSortBy)
     
@@ -49,6 +50,7 @@ export const SpacexSortingTable = () => {
                                         <span>
                                             {column.isSorted ? (column.isSortedDesc ? '▼' : '▲') : ''}
                                         </span>
+                                        <div>{column.canFilter ? column.render('Filter') : null }</div>
                                     </th>
                                 ))}
                             </tr>
@@ -76,3 +78,5 @@ export const SpacexSortingTable = () => {
         </>
     )
 }
+
+//<div>{column.canFilter ? column.render('Filter') : null }</div>
