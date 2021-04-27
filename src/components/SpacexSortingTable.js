@@ -1,7 +1,8 @@
 import React, {useMemo} from 'react'
-import {useTable, useGlobalFilter, useFilters, useSortBy} from 'react-table'
-import {COLUMNS} from './columns'
+import {useTable, useGlobalFilter, useFilters, usePagination, useSortBy} from 'react-table'
 import {GlobalFilter} from './GlobalFilter'
+import { ColumnFilter } from './ColumnFilter'
+import {COLUMNS} from './columns'
 import './table.css'
 
 export const SpacexSortingTable = () => {
@@ -14,30 +15,49 @@ export const SpacexSortingTable = () => {
     const columns = useMemo(() => COLUMNS, [])
     const launchData = useMemo(() => DATA, [])
 
+    const defaultColumn = useMemo(() => {
+        return {
+            Filter: ColumnFilter
+        }
+    }, [])
+
     const tableInstance = useTable({
         columns: columns,
         data: launchData,
+        defaultColumn
     },
     useFilters,
     useGlobalFilter,
-    useSortBy)
+    useSortBy,
+    usePagination)
     
 
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        page,
+        nextPage,
+        canNextPage,
+        previousPage,
+        canPreviousPage,
+        pageOptions,
+        gotoPage,
+        pageCount,
+        setPageSize,
         prepareRow,
         state,
         setGlobalFilter,
     } = tableInstance
 
     const {globalFilter} = state
+    const {pageIndex, pageSize} = state
 
     return (
         <>
-        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+            <div className="global_filter">
+                <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+            </div>
 
             <table {...getTableProps()}>
                 <thead>
@@ -60,7 +80,7 @@ export const SpacexSortingTable = () => {
                 </thead>
                 <tbody {...getTableBodyProps()}>
                     {
-                        rows.map(row => {
+                        page.map(row => {
                             prepareRow(row)
                             return (
                                 <tr {...row.getRowProps()}>
@@ -75,8 +95,45 @@ export const SpacexSortingTable = () => {
                     }
                 </tbody>
             </table>
+            <div className="pagination">
+                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                    {'<<'}
+                </button>
+                <button onClick={() => previousPage()} disabled={!canPreviousPage}
+                    className="pagination_button">Previous</button>
+                <span>
+                    Page{' '}
+                    <strong>
+                        {pageIndex + 1} of {pageOptions.length}
+                    </strong> {' '}
+                </span>
+                <select value={pageSize} 
+                    onchange={(e) => setPageSize(Number(e.target.value))}>
+                    {
+                        [10, 25, 50].map(pageSize => (
+                            <option key={pageSize} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))
+                    }
+                </select>
+                <button onClick={() => nextPage()} disabled={!canNextPage}
+                    className="pagination_button">Next</button>
+                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                    {'>>'}
+                </button>
+            </div>
         </>
     )
 }
 
-//<div>{column.canFilter ? column.render('Filter') : null }</div>
+/*
+<span>
+    | Got to page: {' '}
+    <input type='number' defaultValue={pageIndex +1} 
+    onChange={e => {
+        const pageNumber = e.target.value ? Number(e.target.value) -1 : 0
+        gotoPage(pageNumber)
+    }}/>
+</span>
+*/

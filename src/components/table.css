@@ -21,3 +21,11 @@ text-align: center;
 background-color: #4CAF50;
 color: white;
 }
+
+.global_filter, .pagination {
+    text-align: center;
+    margin: 10px;
+}
+.pagination_button {
+    margin: 0px 10px;
+}
