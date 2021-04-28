@@ -1,11 +1,14 @@
-import './App.css';
-//import {SpacexTable} from './components/SpacexTable'
-import {SpacexSortingTable} from './components/SpacexSortingTable'
+import './index.css';
+import {SpacexLaunches} from './components/SpacexLaunches'
+import {SpacexLogo} from './components/SpacexLogo'
+import {SpacexLaunchImage} from './components/SpacexLaunchImage'
 
 function App() {
   return (
-    <div>
-      <SpacexSortingTable />
+    <div className="body_container">
+      <SpacexLogo />
+      <SpacexLaunchImage />
+      <SpacexLaunches />
     </div>
   )
 }

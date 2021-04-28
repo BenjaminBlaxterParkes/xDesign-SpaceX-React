@@ -29,3 +29,89 @@ color: white;
 .pagination_button {
     margin: 0px 10px;
 }
+
+
+.launches_refresh {
+    float: right;
+    background: #015288;
+    width: 10rem;
+    border-radius: 20px;
+    margin: -4.5rem -1rem .5rem 0rem;
+    padding: .5rem .5rem .5rem 1rem;
+    color: #fff;
+    font-size: 14px;
+    text-align: left;
+}
+.launches_container {
+    padding: 1rem 2.5rem 0 0;
+}
+.table_headers div:nth-child(1), .table_headers div:nth-child(2),
+.table_headers div:nth-child(4), .table_headers div:nth-child(5){
+    display: none;
+}
+.table_headers {
+    display: flex;
+    float: right;
+}
+.dropdown {
+    background: #015288;
+    color: #fff;
+    border: none;
+}
+.dropdown:focus-visible {
+    outline: none!important;
+}
+.launches_filter, .launches_sort {
+    margin-bottom: .5rem;
+    text-align: right;
+}
+.launches_filter span, .launches_sort span {
+    background: #015288;
+    margin-bottom: .5rem;
+    margin-left: 1rem;
+    padding: .5rem;
+    color: #fff;
+    font-size: 14px;
+    text-align: right;
+}
+.sort_image, .refresh_image {
+    padding-left: 0.5rem;
+}
+.launches_list {
+    float: right;
+    margin-top: 1rem;
+}
+.card {
+    flex-direction: row!important;
+    width: 45rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px!important;
+    
+}
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.33)!important;
+}
+.card-body {
+    width: 33%;
+    text-align: center;
+}
+.flight_number::before {
+    content: "#";
+}
+.flight_number {
+    display: block!important;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.5rem;
+    font-size: 24px;
+    font-weight: bold;
+}
+.rocket_name {
+    display: block!important;
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+.flight_date {
+    text-align: right;
+}

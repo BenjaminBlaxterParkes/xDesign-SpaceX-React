@@ -5,16 +5,19 @@ export const COLUMNS = [
     {
         Header: 'Flight Number',
         accessor: 'flight_number',
-        disableFilters: true
+        disableFilters: true,
+        className: 'flight_number'
     },
     {
         Header: 'Rocket Name',
         accessor: 'name',
-        disableFilters: true
+        disableFilters: true,
+        className: 'card-body rocket_name'
     },
     {
-        Header: 'Flight Date',
+        Header: 'Sort ',
         accessor: 'date_utc',
-        Cell: ({value}) => {return format(new Date(value), 'dd/MM/yyyy')},
+        Cell: ({value}) => {return format(new Date(value), 'do LLL yyyy')},
+        className:'card-body flight_date'
     }
 ]
